@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu extends Order{ //Order 클래스를 상속받는다
 
-    ArrayList<Products> burger = new ArrayList<>();
-    ArrayList<Products> frozenCustard = new ArrayList<>();
-    ArrayList<Products> drink = new ArrayList<>();
-    ArrayList<Products> beer = new ArrayList<>();
+    ArrayList<Products> burger = new ArrayList<>();//리스트 생성
+    ArrayList<Products> frozenCustard = new ArrayList<>();//리스트 생성
+    ArrayList<Products> drink = new ArrayList<>();//리스트 생성
+    ArrayList<Products> beer = new ArrayList<>();//리스트 생성
 
-    Order order = new Order();
     Scanner sc = new Scanner(System.in);
     public Menu() { // 각각의 리스트에 이름, 가격, 설명 추가
         burger.add(new Products("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
@@ -33,25 +32,26 @@ public class Menu {
     }
 
 
-    public void showBurger() {
+    public void showBurger() { //버거
         System.out.println();
         System.out.println("[ Burgers Menu ]");
-        for (int i = 0; i < burger.size(); i++) {
-            Products menu = burger.get(i);
+        for (int i = 0; i < burger.size(); i++) {//buger 리스트 길이만큼 반복
+            Products menu = burger.get(i);  //buger 리스트에서 get()을 사용하여 menu 안에 버거정보를 넣는다
             System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
+            //메뉴이름이랑 가격 정보 출력
         }
 
         System.out.print("상품선택 : ");
         int burgerChoice = sc.nextInt();
-        if(burgerChoice<=burger.size()) {
+        sc.nextLine();
+        if(burgerChoice<=burger.size()) {//buger 리스트 사이즈보다 작은 숫자일때 출력
 
-
-            Products select = burger.get(burgerChoice-1);
+            Products select = burger.get(burgerChoice-1);//선택한 번호의 버거를 리스트에서 꺼내서 Products 형 객체에 입력
             System.out.println("\n" + "\"" + select.getName() + "      | W" + select.getPrice()
-                    + " | " + select.getDescription() + "\""+"\n");
-            addOrder(select);
+                    + " | " + select.getDescription() + "\""+"\n");//출력
+            addOrder(select);//장바구니에 저장
         }
-        else{
+        else{//아닐때는 잘못된 숫자라고 출력
             System.out.println("잘못된 입력 입니다.");
         }
 
@@ -69,6 +69,7 @@ public class Menu {
 
         System.out.print("상품선택 : ");
         int frozenCustardChoice = sc.nextInt();
+        sc.nextLine();
         if(frozenCustardChoice<=frozenCustard.size()) {
 
 
@@ -94,6 +95,7 @@ public class Menu {
 
         System.out.print("상품선택 : ");
         int drinkChoice = sc.nextInt();
+        sc.nextLine();
         if(drinkChoice<=drink.size()) {
 
 
@@ -120,6 +122,7 @@ public class Menu {
         System.out.print("상품선택 : ");
 
         int beerChoice = sc.nextInt();
+        sc.nextLine();
         if(beerChoice<=beer.size()) {
 
             Products select = beer.get(beerChoice - 1);
@@ -133,80 +136,6 @@ public class Menu {
 
     }
 
-    public void addOrder(Products add){
-        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
-        System.out.println("1. 확인       2. 취소");
 
-        int check = sc.nextInt();
-        sc.nextLine();
-
-        if (check == 1) {
-            order.addBasket(add);
-            System.out.println(add.getName() + " 가 장바구니에 추가되었습니다.");
-            System.out.println();
-        } else if (check == 2) {
-            System.out.println("장바구니 추가가 취소되었습니다.");
-            System.out.println();
-        } else System.out.println("숫자를 잘못 입력하였습니다.");
-    }
-
-    public void orderComplete(){
-
-        System.out.println("아래와 같이 주문 하시겠습니까?");
-        System.out.println();
-        System.out.println("[ Orders ]");
-        for (int i = 0; i < order.getbasket().size(); i++) {
-            Products menu = order.getbasket().get(i);
-            System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
-        }
-        System.out.println();
-        System.out.println("[ Total ]");
-        System.out.println("W "+order.totalPrice());
-        System.out.println();
-        System.out.println("1. 주문     2. 메뉴판");
-        int orderCheck = sc.nextInt();
-
-        if(orderCheck==1){
-            int orderNumber = order.getOrderNumber();
-
-            System.out.println("주문이 완료되었습니다!");
-            System.out.println();
-            System.out.println("대기번호는 [ " + orderNumber + " ] 번 입니다."); // 대기번호 출력
-            System.out.println("(3초 후 메뉴판으로 돌아갑니다.)");
-            System.out.println();
-
-            order.ClearBasket();
-            order.PlusOrderNumber(orderNumber);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
-        }
-        else {
-            System.out.println("메뉴판으로 돌아갑니다");
-        }
-
-
-    }
-
-    public void Cancel(){
-        System.out.println();
-        System.out.println("진행하던 주문을 취소하시겠습니까?");
-        System.out.println("1. 확인       2. 취소       ");
-
-        int cancelNum = sc.nextInt();
-        sc.nextLine();
-
-
-        if (cancelNum == 1) {
-            order.ClearBasket();
-            System.out.println("진행하던 주문이 취소되었습니다.");
-            System.out.println();
-        } else if (cancelNum == 2) {
-            System.out.println("메뉴판으로 돌아갑니다.");
-
-        }
-    }
 
 }
