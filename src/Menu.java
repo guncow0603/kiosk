@@ -35,8 +35,8 @@ public class Menu extends Order{ //Order 클래스를 상속받는다
     public void showBurger() { //버거
         System.out.println();
         System.out.println("[ Burgers Menu ]");
-        for (int i = 0; i < burger.size(); i++) {//buger 리스트 길이만큼 반복
-            Products menu = burger.get(i);  //buger 리스트에서 get()을 사용하여 menu 안에 버거정보를 넣는다
+        for (int i = 0; i < burger.size(); i++) {//burger 리스트 길이만큼 반복
+            Products menu = burger.get(i);  //burger 리스트에서 get()을 사용하여 menu 안에 버거정보를 넣는다
             System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
             //메뉴이름이랑 가격 정보 출력
         }
@@ -44,7 +44,8 @@ public class Menu extends Order{ //Order 클래스를 상속받는다
         System.out.print("상품선택 : ");
         int burgerChoice = sc.nextInt();
         sc.nextLine();
-        if(burgerChoice<=burger.size()) {//buger 리스트 사이즈보다 작은 숫자일때 출력
+        System.out.println("========================================================");
+        if(burgerChoice<=burger.size()) {//burger 리스트 사이즈보다 작은 숫자일때 출력
 
             Products select = burger.get(burgerChoice-1);//선택한 번호의 버거를 리스트에서 꺼내서 Products 형 객체에 입력
             System.out.println("\n" + "\"" + select.getName() + "      | W" + select.getPrice()
@@ -70,6 +71,7 @@ public class Menu extends Order{ //Order 클래스를 상속받는다
         System.out.print("상품선택 : ");
         int frozenCustardChoice = sc.nextInt();
         sc.nextLine();
+        System.out.println("========================================================");
         if(frozenCustardChoice<=frozenCustard.size()) {
 
 
@@ -96,6 +98,7 @@ public class Menu extends Order{ //Order 클래스를 상속받는다
         System.out.print("상품선택 : ");
         int drinkChoice = sc.nextInt();
         sc.nextLine();
+        System.out.println("========================================================");
         if(drinkChoice<=drink.size()) {
 
 
@@ -123,6 +126,7 @@ public class Menu extends Order{ //Order 클래스를 상속받는다
 
         int beerChoice = sc.nextInt();
         sc.nextLine();
+        System.out.println("========================================================");
         if(beerChoice<=beer.size()) {
 
             Products select = beer.get(beerChoice - 1);
