@@ -12,7 +12,7 @@ public class Order {
     private String requirements; // 요청사항
     String orderTime; // 주문 시각
     String finishedTime; // 주문 완료 시각
-    ArrayList<Order> orderList = new ArrayList<>();    // 주문서 리스트(관리자가 볼 것)
+    ArrayList<Order> orderList = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
     public Order() {
@@ -37,7 +37,7 @@ public class Order {
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
-    //orderNumber에 +1을 해준다.
+
     public void addBasket(Products menu) {
         basket.add(menu);
     }
